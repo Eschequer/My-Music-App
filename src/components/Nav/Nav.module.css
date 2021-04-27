@@ -1,0 +1,20 @@
+.Nav {
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+button {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: lightslategray;
+    color: white;
+}

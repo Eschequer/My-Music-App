@@ -1,0 +1,61 @@
+.LibrarySong {
+ display: flex;
+    align-items: center;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 10px;
+}
+
+.LibrarySong:hover {
+    background-color: rgba(255, 240, 245, 0.4);
+}
+
+.LibrarySong:not(.selected):hover .imagePlayIcon {
+    display: block;
+}
+
+
+
+.songInfo {
+    padding: 5px;
+}
+
+.image {
+    position: relative;
+    width: 20%;
+    margin: 5px;
+}
+
+img {
+    width: 100%;
+}
+
+.imagePlayIcon {
+    color: white;
+    position: absolute;
+    top: calc(50% - 8px);
+    left:calc(50% - 7px);
+    display: none;
+}
+
+.imagePauseIcon {
+    color: white;
+    position: absolute;
+    top: calc(50% - 8px);
+    left:calc(50% - 7px);
+    display: none;
+}
+
+.LibrarySong h5, .LibrarySong h6 {
+    margin: 1px;
+}
+
+.selected {
+    background-color: rgba(255, 240, 245, 0.4);
+    padding: 10px 0;
+}
+
+.selected .playing .imagePauseIcon {
+    display: block;
+}
+

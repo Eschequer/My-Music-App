@@ -1,25 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styles from "./App.module.css";
+import Player from "./components/Player/Player";
+import Song from "./components/Song/Song";
+import { chillHop } from "./util";
+import Library from "./components/Library/Library";
+import Nav from "./components/Nav/Nav";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const listOfSongs = chillHop();
+const currentSong = listOfSongs[0];
+currentSong.active = true;
+
+class App extends React.Component {
+  state = {
+    listOfSongs: listOfSongs,
+    currentSong,
+    isPlaying: false,
+    libraryIsOpen: false,
+  };
+
+  currentSongSelectHandler = (song) => {
+    this.setState((prevState) => {
+      prevState.currentSong.active = false;
+      song.active = true;
+
+      return { currentSong: song, isPlaying: true };
+    });
+  };
+
+  setPlayingStateHandler = () =>
+    this.setState({ isPlaying: !this.state.isPlaying });
+
+  setLibraryStateHandler = () => {
+    this.setState((prevState) => {
+      return { libraryIsOpen: !prevState.libraryIsOpen };
+    });
+  };
+
+  render() {
+    return (
+      <div
+        className={[
+          styles.App,
+          this.state.libraryIsOpen ? styles.openedLibrary : "",
+        ].join(" ")}
+      >
+        <Nav toggleLibrary={this.setLibraryStateHandler} />
+        <Song song={this.state.currentSong} />
+        <Player
+          currentSong={this.state.currentSong}
+          setPlayingState={this.setPlayingStateHandler}
+          playingState={this.state.isPlaying}
+          songs={this.state.listOfSongs}
+          setCurrentSong={this.currentSongSelectHandler}
+        />
+        <Library
+          songs={this.state.listOfSongs}
+          currentSongSelect={this.currentSongSelectHandler}
+          playState={this.state.isPlaying}
+          open={this.state.libraryIsOpen}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;

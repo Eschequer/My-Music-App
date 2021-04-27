@@ -1,0 +1,21 @@
+.Library {
+    position: fixed;
+    top: 0;
+    left: -1000px;
+    width: 18rem;
+    height: 100%;
+    background-color: lightgrey;
+    box-shadow: 2px 2px 20px lightgrey;
+    text-align: center;
+    overflow: auto;
+    transition: left 0.5s ease-in-out;
+}
+
+.open {
+  left: 0;
+}
+
+
+.librarySongs {
+    margin: 10px 5px;
+}

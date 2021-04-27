@@ -1,0 +1,8 @@
+.App {
+    margin: 5px;
+    transition: all 0.5s ease-in-out;
+}
+
+.openedLibrary {
+    margin-left: 18rem;
+}

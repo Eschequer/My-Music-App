@@ -1,0 +1,41 @@
+.Player {
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timeControl {
+  width: 50%;
+  display: flex;
+}
+
+.timeControl input {
+  width: 100%;
+  padding: 1rem 0;
+  /*-webkit-appearance: none;
+  background: transparent;*/
+  cursor: pointer;
+}
+
+/*.timeControl input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  background-color: black;
+}*/
+
+.timeControl p {
+  padding: 1rem;
+  text-align: center;
+}
+
+.playControl {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+}
