@@ -14,8 +14,10 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "prettier"],
+  plugins: ["react", "react-hooks", "prettier"],
   rules: {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "prettier/prettier": [
       "warn",
       {

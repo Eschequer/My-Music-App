@@ -6,3 +6,9 @@
 .openedLibrary {
     margin-left: 18rem;
 }
+
+@media screen and (max-width: 480px){
+    .openedLibrary {
+        margin-left: 0;
+    }
+}

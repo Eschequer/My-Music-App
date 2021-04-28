@@ -18,11 +18,17 @@ const Player = ({
   const [songTimeInfo, setSongTimeInfo] = useState({
     currentTime: 0,
     duration: 0,
+    animationPercentage: 0,
   });
 
   useEffect(() => {
-    if (playingState) audioEl.current.play();
-  });
+    console.log("useEffect");
+    if (playingState) {
+      audioEl.current.play();
+    } else {
+      audioEl.current.pause();
+    }
+  }, [playingState, currentSong]);
 
   const audioEl = useRef(null);
 
@@ -37,15 +43,25 @@ const Player = ({
   }
 
   function timeUpdateHandler(e) {
+    const currentTime = e.target.currentTime;
+    const duration = e.target.duration ? e.target.duration : 0;
+    const animationPercentage = Math.round((currentTime / duration) * 100);
+
     setSongTimeInfo({
       ...songTimeInfo,
-      currentTime: e.target.currentTime,
-      duration: e.target.duration ? e.target.duration : 0,
+      currentTime,
+      duration,
+      animationPercentage,
     });
   }
 
   function dragSliderHandler(e) {
     audioEl.current.currentTime = e.target.value;
+  }
+
+  function endAudio(e) {
+    e.target.currentTime = 0;
+    setPlayingState(false);
   }
 
   function setPreviousSongHandler() {
@@ -73,13 +89,26 @@ const Player = ({
     <div className={styles.Player}>
       <div className={styles.timeControl}>
         <p>{getTime(songTimeInfo.currentTime)}</p>
-        <input
-          type="range"
-          min={0}
-          max={songTimeInfo.duration}
-          value={songTimeInfo.currentTime}
-          onChange={dragSliderHandler}
-        />
+        <div
+          className={styles.track}
+          style={{
+            backgroundImage: `linear-gradient(to right, ${currentSong.colors[0]}, ${currentSong.colors[1]})`,
+          }}
+        >
+          <input
+            type="range"
+            min={0}
+            max={songTimeInfo.duration}
+            value={songTimeInfo.currentTime}
+            onChange={dragSliderHandler}
+          />
+          <div
+            className={styles.animateTrack}
+            style={{
+              transform: `translateX(${songTimeInfo.animationPercentage}%)`,
+            }}
+          />
+        </div>
         <p>{getTime(songTimeInfo.duration)}</p>
       </div>
       <div className={styles.playControl}>
@@ -103,6 +132,7 @@ const Player = ({
         ref={audioEl}
         onTimeUpdate={timeUpdateHandler}
         onLoadedMetadata={timeUpdateHandler}
+        onEnded={endAudio}
         src={currentSong.audio}
       >
         <source src={currentSong.audio} type="audio/mpeg" />

@@ -4,6 +4,7 @@
     text-align: left;
     font-family: 'Montserrat', sans-serif;
     border-radius: 10px;
+    transition: all 0.3s;
 }
 
 .LibrarySong:hover {
@@ -55,6 +56,13 @@ img {
     padding: 10px 0;
 }
 
+.selected .imagePlayIcon {
+    display: block;
+}
+
+.selected .playing .imagePlayIcon {
+    display: none;
+}
 .selected .playing .imagePauseIcon {
     display: block;
 }

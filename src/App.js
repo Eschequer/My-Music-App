@@ -27,10 +27,9 @@ class App extends React.Component {
     });
   };
 
-  setPlayingStateHandler = () =>
-    this.setState({ isPlaying: !this.state.isPlaying });
+  setPlayingStateHandler = (state) => this.setState({ isPlaying: state });
 
-  setLibraryStateHandler = () => {
+  toggleLibraryStateHandler = () => {
     this.setState((prevState) => {
       return { libraryIsOpen: !prevState.libraryIsOpen };
     });
@@ -44,7 +43,10 @@ class App extends React.Component {
           this.state.libraryIsOpen ? styles.openedLibrary : "",
         ].join(" ")}
       >
-        <Nav toggleLibrary={this.setLibraryStateHandler} />
+        <Nav
+          toggleLibrary={this.toggleLibraryStateHandler}
+          libraryIsOpen={this.state.libraryIsOpen}
+        />
         <Song song={this.state.currentSong} />
         <Player
           currentSong={this.state.currentSong}
@@ -58,6 +60,8 @@ class App extends React.Component {
           currentSongSelect={this.currentSongSelectHandler}
           playState={this.state.isPlaying}
           open={this.state.libraryIsOpen}
+          currentSong={this.state.currentSong}
+          setPlayingState={this.setPlayingStateHandler}
         />
       </div>
     );

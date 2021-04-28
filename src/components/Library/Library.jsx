@@ -13,6 +13,8 @@ const Library = (props) => {
             key={song.id}
             currentSongSelect={props.currentSongSelect}
             playState={props.playState}
+            currentSong={props.currentSong}
+            setPlayingState={props.setPlayingState}
           />
         ))}
       </div>

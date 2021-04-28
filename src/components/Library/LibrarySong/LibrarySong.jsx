@@ -4,20 +4,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 const LibrarySong = (props) => {
-  const { name, artist, cover, album } = props.song;
+  const { name, artist, cover, album, id } = props.song;
+
+  function selectLibrarySongHandler() {
+    if (props.currentSong.id === id) {
+      props.playState
+        ? props.setPlayingState(false)
+        : props.setPlayingState(true);
+    } else {
+      props.currentSongSelect(props.song);
+    }
+  }
 
   return (
     <div
       className={[
         styles.LibrarySong,
-        props.song.active && styles.selected,
+        props.song.active ? styles.selected : "",
       ].join(" ")}
-      onClick={() => {
-        props.currentSongSelect(props.song);
-      }}
+      onClick={selectLibrarySongHandler}
     >
       <div
-        className={[styles.image, props.playState && styles.playing].join(" ")}
+        className={[styles.image, props.playState ? styles.playing : ""].join(
+          " "
+        )}
       >
         <img src={cover} alt={album} />
         <FontAwesomeIcon icon={faPlay} className={styles.imagePlayIcon} />
